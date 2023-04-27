@@ -10,13 +10,26 @@ let btn = document.getElementById("posts-home")
 
 const values = async ()=>{
     let get = await getElement()
+    console.log('Estamos en filters...')
+    //console.log(get)
     document.querySelectorAll('#posts-home .card').forEach(card => card.remove())
-    for( let key in get){
-        let {creationDate,image,tags,title, userName} = get[key]
-        btn.appendChild(createCardPostHome(image,title, userName,tags,creationDate,key,isLogged))
+    console.log(get['data']['data'])
+
+    get['data']['data'].forEach((item)=>{
+        let {title, tags, _id} = item
+
+        btn.appendChild(createCardPostHome(title, tags,isLogged, _id))
+        wordslower.push(title.toLowerCase())
+    })
+
+    //for( let key in get){
+    //    console.log(get[key])
         
-        wordslower.push(title.toLowerCase())//almace
-    }
+        //let {creationDate,image,tags,title, userName} = get[key]
+        //btn.appendChild(createCardPostHome(image,title, userName,tags,creationDate,key,isLogged))
+        
+        //wordslower.push(title.toLowerCase())//almace
+    //}
     document.getElementById('relevant').addEventListener('click', values)
 }
 

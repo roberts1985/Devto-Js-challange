@@ -28,21 +28,24 @@ if (!isLogged()) {
 
 const renderPost = async () => {
   let postObject = await getPostById(id);
-  let { image, title, userName, creationDate, tags, content } = postObject;
-  let formatDate = moment(creationDate).format('DD/MM/YYYY');
-  let timeAgo = moment(creationDate).fromNow();
+  console.log('Estamos en postView.js')
+  console.log(postObject["data"]["data"])
+  //let { image, title, userName, creationDate, tags, content } = postObject;
+  let { title, tags, content } = postObject["data"]["data"];
+  //let formatDate = moment(creationDate).format('DD/MM/YYYY');
+  //let timeAgo = moment(creationDate).fromNow();
 
-  imgDOM.src = image;
+  imgDOM.src = "https://picsum.photos/300";
   titleDOM.textContent = title;
-  nameDOM.textContent = userName;
-  dateDOM.textContent = `${formatDate} (${timeAgo})`;
+  //nameDOM.textContent = userName;
+  //dateDOM.textContent = `${formatDate} (${timeAgo})`;
   detailsDOM.textContent = content
   //Hashtags DOM
-  tags.split(/[,\s]+/).forEach(tag => {
+  /*tags.split(/[,\s]+/).forEach(tag => {
     let li = document.createElement('li');
     li.textContent = `#${tag}`;
     ulDOM.appendChild(li);
-  })
+  })*/
 };
 
 renderPost();

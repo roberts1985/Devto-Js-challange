@@ -1,14 +1,15 @@
 import { values } from "./filter.js";
 import { deleteByid } from "./requestPostsView.js";
 
-const createCardPostHome = (imgUrl, postTitle, userName = 'Anónimo', hashtags, date, id, isLogged) => {
+//const createCardPostHome = (imgUrl, postTitle, userName = 'Anónimo', hashtags, date, id, isLogged) => {
+const createCardPostHome = (postTitle, hashtags, isLogged, id) => {  
 
   //CONTENEDOR PRINCIPAL
   let card = document.createElement('div');
   card.classList.add('card', 'shadow', 'mb-2')
   let imgCard = document.createElement('img');
   imgCard.classList.add('card-img-top');
-  imgCard.src = imgUrl;
+  imgCard.src = "https://picsum.photos/300";
   let cardBody = document.createElement('div');
   cardBody.classList.add('card-body');
 
@@ -25,9 +26,9 @@ const createCardPostHome = (imgUrl, postTitle, userName = 'Anónimo', hashtags, 
   img.style.width = "40px";
   span.classList.add("d-flex", "flex-column", "justify-content-center");
   h5.classList.add("fs-6", "fw-bold", "m-0");
-  h5.textContent = userName; //Rgistrar nombre de usuario que inicio sesión
+  //h5.textContent = userName; //Rgistrar nombre de usuario que inicio sesión
   span2C1.classList.add("fw-light", "date");
-  span2C1.textContent = `${moment(date).format('MMM D')} (${moment(date).fromNow()})`
+  //span2C1.textContent = `${moment(date).format('MMM D')} (${moment(date).fromNow()})`
 
   span.appendChild(h5);
   span.appendChild(span2C1);
@@ -49,11 +50,11 @@ const createCardPostHome = (imgUrl, postTitle, userName = 'Anónimo', hashtags, 
   const ul = document.createElement("ul");
   ul.classList.add("list-tag__main");
 
-  hashtags.split(/[,\s]+/).forEach((hashtag) => {
+ /* hashtags.split(/[,\s]+/).forEach((hashtag) => {
     const li = document.createElement("li");
     li.textContent = `#${hashtag}`;
     ul.appendChild(li);
-  });
+  });*/
 
   divC2.appendChild(h1);
   divC2.appendChild(ul);
@@ -88,7 +89,7 @@ const createCardPostHome = (imgUrl, postTitle, userName = 'Anónimo', hashtags, 
   img3.setAttribute("src", "../assets/save-icon.svg");
   img3.setAttribute("alt", "");
   span3.classList.add("d-flex", "align-items-center");
-  span3.appendChild(document.createTextNode(moment(date).startOf().fromNow()));
+  //span3.appendChild(document.createTextNode(moment(date).startOf().fromNow()));
   span3.appendChild(img3);
   div3.appendChild(span3);
   divC3.appendChild(div3);
@@ -97,11 +98,11 @@ const createCardPostHome = (imgUrl, postTitle, userName = 'Anónimo', hashtags, 
   if (isLogged()) {
     let btnDelete = document.createElement('button');
     btnDelete.classList.add('btn', 'btn-danger', 'py-0', 'mx-3');
-    btnDelete.setAttribute('id', id);
+    //btnDelete.setAttribute('id', id);
     btnDelete.textContent = 'Delete';
     btnDelete.addEventListener('click', async (e) => {
       e.currentTarget.parentNode.parentNode.parentNode.parentNode.parentNode.remove();
-      await deleteByid(e.currentTarget.id);
+      //await deleteByid(e.currentTarget.id);
     });
     span3.insertBefore(btnDelete, img3);
   }
